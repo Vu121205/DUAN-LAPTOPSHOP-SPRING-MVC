@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UserService;
 
@@ -20,10 +21,12 @@ public class UserController {
     }
 
     @RequestMapping("/")
-    public String getHomePage()
+    public String getHomePage(Model model)
     {
         String test = this.userService.handleHello();
-        return "Vudoan.html";
+        model.addAttribute("vudoan", test);
+        model.addAttribute("vudoan1", "from controller");
+        return "hello";
     }
 }
 
