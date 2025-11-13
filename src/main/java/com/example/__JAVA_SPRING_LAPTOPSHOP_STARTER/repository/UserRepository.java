@@ -11,6 +11,6 @@ import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User save(User vudoan);
 
-    List<User> findByEmail(String email);
-    List<User> findByEmailAndAddress(String email, String address);
+    List<User> findOneByEmail(String email);
+    List<User> findAll();
 }

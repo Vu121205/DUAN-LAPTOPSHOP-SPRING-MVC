@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -45,26 +47,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>
-                <button type="button" class="btn btn-success">View</button>
-                <button type="button" class="btn btn-warning">Update</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <th>2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>
-                <button type="button" class="btn btn-success">View</button>
-                <button type="button" class="btn btn-warning">Update</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-              </td>
-            </tr>
+            <c:forEach var="user" items="${users1}">
+              <tr>
+                <th>${user.id}</th>
+                <td>${user.email}</td>
+                <td>${user.fullName}</td>
+                <td>
+                  <button type="button" class="btn btn-success">View</button>
+                  <button type="button" class="btn btn-warning">Update</button>
+                  <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+              </tr>
+            </c:forEach>
           </tbody>
         </table>
       </div>
