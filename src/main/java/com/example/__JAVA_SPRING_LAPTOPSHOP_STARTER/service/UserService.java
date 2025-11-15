@@ -30,4 +30,9 @@ public class UserService {
         System.out.println(vudoan);
         return vudoan;
     }
+
+    public User getUserById(long id)
+    {
+        return this.userRepository.findById(id);
+    }
 }

@@ -4,12 +4,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.Model;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UserService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class UserController {
@@ -39,6 +43,16 @@ public class UserController {
         return "admin/user/table-user";
     }
 
+    @RequestMapping("/admin/user/{id}")
+    public String getUserDetailPage(Model model, @PathVariable long id)
+    {
+        User user = this.userService.getUserById(id);
+
+        model.addAttribute("user", user);
+        model.addAttribute("id", id);
+        return "admin/user/show";
+    }
+
     @RequestMapping("/admin/user/create")//GET
     public String getCreateUserPage(Model model)
     { 
@@ -50,6 +64,28 @@ public class UserController {
     public String createUserPage(Model model, @ModelAttribute("newUser") User vudoan)
     {
         this.userService.handleSaveUser(vudoan);
+        return "redirect:/admin/user";
+    }
+
+    @RequestMapping("/admin/user/update/{id}") //GET
+    public String getUpdateUserPage(Model model, @PathVariable long id)
+    {
+        User currentUser = this.userService.getUserById(id);
+        model.addAttribute("newUser", currentUser);
+        return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User vudoan)
+    {
+        User currentUser = this.userService.getUserById(vudoan.getId());
+        if(currentUser != null){
+            currentUser.setAddress(vudoan.getAddress());
+            currentUser.setFullName(vudoan.getFullName());
+            currentUser.setPhone(vudoan.getPhone());
+            
+            this.userService.handleSaveUser(vudoan);
+        }
         return "redirect:/admin/user";
     }
 }

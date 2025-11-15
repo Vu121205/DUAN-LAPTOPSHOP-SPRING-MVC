@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Table Users</title>
+    <title>User detail ${id}</title>
 
     <!-- Nhúng bootstrap -->
     <link
@@ -29,38 +29,24 @@
     <!-- <link href="/css/demo.css " rel="stylesheet"> -->
   </head>
   <body>
-    <div class="container">
-      <div class="d-flex justify-content-between pt-5">
-        <h2>Table users</h2>
-        <a href="http://localhost:8080/admin/user" class="btn btn-primary">Create a user</a>
-      </div>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 col-12 mx-auto">
+          <h3>User detail with id = ${id}</h3>
+          <hr />
 
-      <hr />
-      <div class="pt-3">
-        <table class="table table-hover table-bordered">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Email</th>
-              <th>Full Name</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <c:forEach var="user" items="${users1}">
-              <tr>
-                <th>${user.id}</th>
-                <td>${user.email}</td>
-                <td>${user.fullName}</td>
-                <td>
-                  <a href="/admin/user/${user.id}" type="button" class="btn btn-success">View</a>
-                  <a href="/admin/user/update/${user.id}" type="button" class="btn btn-warning">Update</a>
-                  <a type="button" class="btn btn-danger">Delete</a>
-                </td>
-              </tr>
-            </c:forEach>
-          </tbody>
-        </table>
+          <div class="card">
+            <div class="card-header">User information</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">ID: ${user.id}</li>
+              <li class="list-group-item">Email: ${user.email}</li>
+              <li class="list-group-item">FullName: ${user.fullName}</li>
+              <li class="list-group-item">Address: ${user.address}</li>
+            </ul>
+
+            <a href="http://localhost:8080/admin/user" class="btn btn-success mt-3">Back</a>
+          </div>
+        </div>
       </div>
     </div>
   </body>
