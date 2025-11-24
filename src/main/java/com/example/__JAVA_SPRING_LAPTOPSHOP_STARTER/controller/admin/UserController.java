@@ -1,4 +1,4 @@
-package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.controller;
+package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.controller.admin;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class UserController {
     {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users1", users);
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     @RequestMapping("/admin/user/{id}")
@@ -51,7 +51,7 @@ public class UserController {
 
         model.addAttribute("user", user);
         model.addAttribute("id", id);
-        return "admin/user/show";
+        return "admin/user/detail";
     }
 
     @RequestMapping("/admin/user/create")//GET
@@ -87,6 +87,7 @@ public class UserController {
             
             this.userService.handleSaveUser(vudoan);
         }
+        //redirect sẽ chuyển hướng trình duyệt sang /admin/user
         return "redirect:/admin/user";
     }
 
