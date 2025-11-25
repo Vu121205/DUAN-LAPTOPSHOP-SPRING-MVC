@@ -39,7 +39,7 @@
                 <div class="col-md-6 col-12 mx-auto">
                   <h3>Create a user</h3>
                   <hr />
-                  <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
+                  <form:form method="post" action="/admin/user/create" modelAttribute="newUser" enctype="multipart/form-data">
                     <div class="row">
                       <div class="mb-3 col-md-6 col-12">
                         <label class="form-label">Email:</label>
@@ -63,14 +63,14 @@
                       </div>
                       <div class="mb-3 col-md-6 col-12">
                         <label class="form-label">Role:</label>
-                        <select class="form-select">
-                          <option value="ADMIN">ADMIN</option>
-                          <option value="USER">USER</option>
-                        </select>
+                        <form:select class="form-select" path = "role.name">
+                          <form:option value="ADMIN">ADMIN</form:option>
+                          <form:option value="USER">USER</form:option>
+                        </form:select>
                       </div>
                       <div class="mb-3 col-md-6 col-12">
                         <label for="avatarFile" class="form-label">Avatar:</label>
-                        <input class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg" />
+                        <input class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg" name="vudoanFile"/>
                       </div>
                       <div class="col-12 mb-3">
                         <img style="max-height: 250px; display: none;" alt="avatar preview" id="avatarPreview">

@@ -1,5 +1,9 @@
 package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.controller.admin;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -7,11 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UploadService;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UserService;
+
+import jakarta.servlet.ServletContext;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -20,9 +29,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
     
     private final UserService userService;
+    private final UploadService uploadService;  
 
-    public UserController(UserService userService) {
-        this.userService = userService; 
+    public UserController(UserService userService, UploadService uploadService) {
+        this.userService = userService;
+        this.uploadService = uploadService;
     }
 
     @RequestMapping("/")
@@ -54,17 +65,18 @@ public class UserController {
         return "admin/user/detail";
     }
 
-    @RequestMapping("/admin/user/create")//GET
+    @GetMapping("/admin/user/create")//GET
     public String getCreateUserPage(Model model)
     { 
         model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
 
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String createUserPage(Model model, @ModelAttribute("newUser") User vudoan)
+    @PostMapping("/admin/user/create")
+    public String createUserPage(Model model, @ModelAttribute("newUser") User vudoan, @RequestParam("vudoanFile") MultipartFile file )
     {
-        this.userService.handleSaveUser(vudoan);
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        // this.userService.handleSaveUser(vudoan);
         return "redirect:/admin/user";
     }
 
