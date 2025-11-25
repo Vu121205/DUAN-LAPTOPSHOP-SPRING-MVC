@@ -1,11 +1,8 @@
 package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.controller.admin;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,9 +15,6 @@ import org.springframework.ui.Model;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UploadService;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UserService;
-
-import jakarta.servlet.ServletContext;
-
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -29,11 +23,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
     
     private final UserService userService;
-    private final UploadService uploadService;  
+    private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;  
 
-    public UserController(UserService userService, UploadService uploadService) {
+    
+
+    public UserController(UserService userService, UploadService uploadService,
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -76,7 +75,13 @@ public class UserController {
     public String createUserPage(Model model, @ModelAttribute("newUser") User vudoan, @RequestParam("vudoanFile") MultipartFile file )
     {
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
-        // this.userService.handleSaveUser(vudoan);
+        String hashPassword = this.passwordEncoder.encode(vudoan.getPassword());
+
+        vudoan.setAvarta(avatar);
+        vudoan.setPassword(hashPassword);
+        vudoan.setRole(this.userService.getRoleByName(vudoan.getRole().getName()));
+
+        this.userService.handleSaveUser(vudoan);
         return "redirect:/admin/user";
     }
 
