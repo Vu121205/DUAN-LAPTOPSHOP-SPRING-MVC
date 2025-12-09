@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,10 +20,40 @@
           <div class="container-fluid px-4">
             <h1 class="mt-4">Manage Products</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
               <li class="breadcrumb-item active">Products</li>
             </ol>
-            <div>Table product</div>
+            <div class="d-flex align-items-center justify-content-between">
+              <h2>Table product</h2>
+              <a href="/admin/product/create" class="btn btn-primary">Create a product</a>
+            </div>
+            <div class="mt-2">
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Price</th>
+                    <th>Factory</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Chưa fix -->
+                  <tr>
+                    <th></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <a href="#" type="button" class="btn btn-success">View</a>
+                      <a href="#" type="button" class="btn btn-warning">Update</a>
+                      <a href="#" type="button" class="btn btn-danger">Delete</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </main>
         <jsp:include page="../layout/footer.jsp" />

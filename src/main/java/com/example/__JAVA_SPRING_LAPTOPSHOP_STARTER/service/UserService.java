@@ -19,6 +19,7 @@ public class UserService {
         this.roleRepository = roleRepository;
     }
 
+
     public List<User> getAllUsers()
     {
         return this.userRepository.findAll();
@@ -49,4 +50,5 @@ public class UserService {
     {
         return this.roleRepository.findByName(name);
     }
+
 }

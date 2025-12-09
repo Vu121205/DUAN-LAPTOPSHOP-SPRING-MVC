@@ -1,7 +1,6 @@
 package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.controller.admin;
 
 import java.util.List;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Role;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UploadService;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UserService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -25,8 +30,6 @@ public class UserController {
     private final UserService userService;
     private final UploadService uploadService;
     private final PasswordEncoder passwordEncoder;  
-
-    
 
     public UserController(UserService userService, UploadService uploadService,
             PasswordEncoder passwordEncoder) {
@@ -72,11 +75,23 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") User vudoan, @RequestParam("vudoanFile") MultipartFile file )
+    public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User vudoan, BindingResult newUserbindingResult, @RequestParam("vudoanFile") MultipartFile file )////////////
     {
+        //validate
+        List<FieldError> errors = newUserbindingResult.getFieldErrors();
+        for(FieldError error : errors)
+        {
+            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        }
+
+        if(newUserbindingResult.hasErrors())
+        {
+            return "/admin/user/create";
+        }
+
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(vudoan.getPassword());
-
+ 
         vudoan.setAvarta(avatar);
         vudoan.setPassword(hashPassword);
         vudoan.setRole(this.userService.getRoleByName(vudoan.getRole().getName()));
@@ -94,15 +109,21 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model, @ModelAttribute("newUser") User vudoan)
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User vudoan, @RequestParam("vudoanFile") MultipartFile file)
     {
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");      
         User currentUser = this.userService.getUserById(vudoan.getId());
         if(currentUser != null){
-            currentUser.setAddress(vudoan.getAddress());
-            currentUser.setFullName(vudoan.getFullName());
+              
             currentUser.setPhone(vudoan.getPhone());
-            
-            this.userService.handleSaveUser(vudoan);
+            currentUser.setFullName(vudoan.getFullName());
+            currentUser.setAddress(vudoan.getAddress());
+            currentUser.setAvarta(avatar);
+
+            Role role = this.userService.getRoleByName(vudoan.getRole().getName());
+            currentUser.setRole(role);
+
+            this.userService.handleSaveUser(currentUser);
         }
         //redirect sẽ chuyển hướng trình duyệt sang /admin/user
         return "redirect:/admin/user";
