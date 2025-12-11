@@ -39,18 +39,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- Chưa fix -->
-                  <tr>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <a href="#" type="button" class="btn btn-success">View</a>
-                      <a href="#" type="button" class="btn btn-warning">Update</a>
-                      <a href="#" type="button" class="btn btn-danger">Delete</a>
-                    </td>
-                  </tr>
+                  <c:forEach var="product" items="${products}">
+                    <tr>
+                      <th>${product.id}</th>
+                      <td>${product.name}</td>
+                      <td>${product.price}</td>
+                      <td>${product.factory}</td>
+                      <td>
+                        <a href="/admin/product/${product.id}" type="button" class="btn btn-success">View</a>
+                        <a href="/admin/product/update/${product.id}" type="button" class="btn btn-warning">Update</a>
+                        <a href="/admin/product/delete/${product.id}" type="button" class="btn btn-danger">Delete</a>
+                      </td>
+                    </tr>
+                  </c:forEach>
                 </tbody>
               </table>
             </div>

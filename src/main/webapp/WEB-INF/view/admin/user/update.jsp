@@ -50,6 +50,10 @@
                       <label class="form-label">Email:</label>
                       <form:input type="email" class="form-control" path="email" disabled="true" />
                     </div>
+                    <div class="mb-3 col-md-6 col-12" style="display: none">
+                        <label class="form-label">Password:</label>
+                        <form:input type="password" class="form-control" path="password" />               
+                    </div>
                     <div class="mb-3">
                       <label class="form-label">Phone number:</label>
                       <form:input type="text" class="form-control" path="phone" />

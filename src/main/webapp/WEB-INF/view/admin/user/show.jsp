@@ -24,7 +24,7 @@
               <li class="breadcrumb-item active">Users</li>
             </ol>
             <div>
-      <div class="d-flex justify-content-between pt-5">
+      <div class="d-flex justify-content-between align-items-center pt-5">
         <h2>Table users</h2>
         <a href="http://localhost:8080/admin/user/create" class="btn btn-primary">Create a user</a>
       </div>

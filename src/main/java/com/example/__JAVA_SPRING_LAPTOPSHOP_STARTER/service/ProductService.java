@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Product;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.ProductRepository;
+
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
@@ -14,15 +16,29 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getAllUsers()
+    public Product createProduct(Product product)
+    {
+        return this.productRepository.save(product);
+    }
+
+    public List<Product> fetchProducts()
     {
         return this.productRepository.findAll();
     }
 
-    public Product Save(Product product)
+    public Product getProductById(long id)
     {
-        return this.Save(product);
+        return this.productRepository.getProductById(id);
     }
 
+    public Product handleSaveProduct(Product currentProduct){
+        Product product = this.productRepository.save(currentProduct);
+        return product;
+    }
+
+    public Product DeleteProductById(long id)
+    {
+       return this.productRepository.deleteById(id);
+    }
 
 }

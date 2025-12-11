@@ -52,8 +52,7 @@
                         </c:set>
                         <label class="form-label">Password:</label>
                         <form:input type="password" class="form-control ${not empty errorPassword ? 'is-invalid' : ''}" path="password" />
-                        ${errorPassword}
-                        
+                        ${errorPassword}                       
                       </div>
                       <div class="mb-3 col-md-6 col-12">
                         <label class="form-label">Phone number:</label>
@@ -64,7 +63,7 @@
                           <form:errors path="fullName" cssClass="invalid-feedback"/>
                         </c:set>
                         <label class="form-label">Full Name:</label>
-                        <form:input type="text" class="form-control ${not empty errorPassword ? 'is-invalid' : ''}" path="fullName" />
+                        <form:input type="text" class="form-control ${not empty errorFullName ? 'is-invalid' : ''}" path="fullName" />
                         ${errorFullName}
                       </div>
                       <div class="mb-3">

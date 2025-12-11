@@ -12,8 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.validation.OnCreate;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.validation.OnUpdate;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Role;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UploadService;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UserService;
@@ -75,7 +78,7 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User vudoan, BindingResult newUserbindingResult, @RequestParam("vudoanFile") MultipartFile file )////////////
+    public String createUserPage(Model model, @ModelAttribute("newUser") @Validated(OnCreate.class) User vudoan, BindingResult newUserbindingResult, @RequestParam("vudoanFile") MultipartFile file )////////////
     {
         //validate
         List<FieldError> errors = newUserbindingResult.getFieldErrors();
@@ -92,7 +95,7 @@ public class UserController {
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(vudoan.getPassword());
  
-        vudoan.setAvarta(avatar);
+        vudoan.setAvatar(avatar);
         vudoan.setPassword(hashPassword);
         vudoan.setRole(this.userService.getRoleByName(vudoan.getRole().getName()));
 
@@ -109,7 +112,7 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model, @ModelAttribute("newUser") User vudoan, @RequestParam("vudoanFile") MultipartFile file)
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") @Validated(OnUpdate.class) User vudoan, @RequestParam("vudoanFile") MultipartFile file)
     {
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");      
         User currentUser = this.userService.getUserById(vudoan.getId());
@@ -118,7 +121,7 @@ public class UserController {
             currentUser.setPhone(vudoan.getPhone());
             currentUser.setFullName(vudoan.getFullName());
             currentUser.setAddress(vudoan.getAddress());
-            currentUser.setAvarta(avatar);
+            currentUser.setAvatar(avatar);
 
             Role role = this.userService.getRoleByName(vudoan.getRole().getName());
             currentUser.setRole(role);
