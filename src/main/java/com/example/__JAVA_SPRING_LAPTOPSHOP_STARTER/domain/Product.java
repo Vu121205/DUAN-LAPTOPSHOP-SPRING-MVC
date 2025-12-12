@@ -1,5 +1,6 @@
 package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +30,8 @@ public class Product {
 
     @NotNull
     @NotEmpty(message = "detailDesc không được để trống")
+    //Cài đặt kiểu dữ liệu lại tàn text trong database
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
 
     @NotNull
