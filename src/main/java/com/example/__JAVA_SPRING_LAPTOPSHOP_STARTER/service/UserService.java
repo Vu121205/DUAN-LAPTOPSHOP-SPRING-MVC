@@ -2,10 +2,13 @@ package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service;
 
 import java.util.List;
 
+import org.springframework.data.aot.RegisteredBeanAotContribution;
 import org.springframework.stereotype.Service;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Role;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.dto.RegisterDTO;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.dto.registerDTO;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.RoleRepository;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.UserRepository;
 
@@ -49,6 +52,17 @@ public class UserService {
     public Role getRoleByName(String name)
     {
         return this.roleRepository.findByName(name);
+    }
+
+    public User registerDTOtoUser(RegisterDTO registerDTO)
+    {
+        User user = new User();
+
+        user.setFullName(registerDTO.getFirstName()+" "+registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+
+        return user;
     }
 
 }

@@ -1,9 +1,10 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %> <%@
+taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Fruitables - Vegetable Website Template</title>
+    <title>${product.name}-Laptopshop</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="keywords" />
     <meta content="" name="description" />
@@ -22,10 +23,10 @@
     <link href="/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="resources/client/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/resources/client/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Template Stylesheet -->
-    <link href="resources/client/css/style.css" rel="stylesheet" />
+    <link href="/resources/client/css/style.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -76,14 +77,14 @@
               <div class="col-lg-6">
                 <div class="border rounded">
                   <a href="#">
-                    <img src="client/img/single-item.jpg" class="img-fluid rounded" alt="Image" />
+                    <img src="/images/product/${product.image}" class="img-fluid rounded" alt="Image" />
                   </a>
                 </div>
               </div>
               <div class="col-lg-6">
-                <h4 class="fw-bold mb-3">Brocoli</h4>
-                <p class="mb-3">Category: Vegetables</p>
-                <h5 class="fw-bold mb-3">3,35 $</h5>
+                <h4 class="fw-bold mb-3">${product.name}</h4>
+                <p class="mb-3">${product.factory}</p>
+                <h5 class="fw-bold mb-3"><fmt:formatNumber type="number" value="${product.price}" /></h5>
                 <div class="d-flex mb-4">
                   <i class="fa fa-star text-secondary"></i>
                   <i class="fa fa-star text-secondary"></i>
@@ -91,8 +92,7 @@
                   <i class="fa fa-star text-secondary"></i>
                   <i class="fa fa-star"></i>
                 </div>
-                <p class="mb-4">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
-                <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish</p>
+                <p class="mb-4">${product.shortDesc}</p>
                 <div class="input-group quantity mb-5" style="width: 100px">
                   <div class="input-group-btn">
                     <button class="btn btn-sm btn-minus rounded-circle bg-light border">
@@ -130,61 +130,7 @@
                 </nav>
                 <div class="tab-content mb-5">
                   <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                    <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. Susp endisse ultricies nisi vel quam suscipit</p>
-                    <p>
-                      Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric
-                      ray sweeper.
-                    </p>
-                    <div class="px-2">
-                      <div class="row g-4">
-                        <div class="col-6">
-                          <div class="row bg-light align-items-center text-center justify-content-center py-2">
-                            <div class="col-6">
-                              <p class="mb-0">Weight</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">1 kg</p>
-                            </div>
-                          </div>
-                          <div class="row text-center align-items-center justify-content-center py-2">
-                            <div class="col-6">
-                              <p class="mb-0">Country of Origin</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">Agro Farm</p>
-                            </div>
-                          </div>
-                          <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                            <div class="col-6">
-                              <p class="mb-0">Quality</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">Organic</p>
-                            </div>
-                          </div>
-                          <div class="row text-center align-items-center justify-content-center py-2">
-                            <div class="col-6">
-                              <p class="mb-0">Сheck</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">Healthy</p>
-                            </div>
-                          </div>
-                          <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                            <div class="col-6">
-                              <p class="mb-0">Min Weight</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">250 Kg</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="nav-vision" role="tabpanel">
-                    <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. 3</p>
-                    <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit</p>
+                    <p>${product.detailDesc}</p>
                   </div>
                 </div>
               </div>
@@ -200,7 +146,7 @@
                       <div class="d-flex justify-content-between fruite-name">
                         <a href="#">
                           <i class="fas fa-apple-alt me-2"></i>
-                          Apples
+                          Apple
                         </a>
                         <span>(3)</span>
                       </div>
@@ -209,7 +155,7 @@
                       <div class="d-flex justify-content-between fruite-name">
                         <a href="#">
                           <i class="fas fa-apple-alt me-2"></i>
-                          Oranges
+                          Acer
                         </a>
                         <span>(5)</span>
                       </div>
@@ -218,7 +164,7 @@
                       <div class="d-flex justify-content-between fruite-name">
                         <a href="#">
                           <i class="fas fa-apple-alt me-2"></i>
-                          Strawbery
+                          Asus
                         </a>
                         <span>(2)</span>
                       </div>
@@ -227,7 +173,7 @@
                       <div class="d-flex justify-content-between fruite-name">
                         <a href="#">
                           <i class="fas fa-apple-alt me-2"></i>
-                          Banana
+                          Lonovo
                         </a>
                         <span>(8)</span>
                       </div>
@@ -236,7 +182,7 @@
                       <div class="d-flex justify-content-between fruite-name">
                         <a href="#">
                           <i class="fas fa-apple-alt me-2"></i>
-                          Pumpkin
+                          Dell
                         </a>
                         <span>(5)</span>
                       </div>
@@ -250,142 +196,25 @@
         <h1 class="fw-bold mb-0">Related products</h1>
         <div class="vesitable">
           <div class="owl-carousel vegetable-carousel justify-content-center">
-            <div class="border border-primary rounded position-relative vesitable-item">
-              <div class="vesitable-img">
-                <img src="client/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="" />
-              </div>
-              <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px">Vegetable</div>
-              <div class="p-4 pb-0 rounded-bottom">
-                <h4>Parsely</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                <div class="d-flex justify-content-between flex-lg-wrap">
-                  <p class="text-dark fs-5 fw-bold">$4.99 / kg</p>
-                  <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
-                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                    Add to cart
-                  </a>
+            <c:forEach var="product" items="${products}">
+              <div class="border border-primary rounded position-relative vesitable-item">
+                <div class="vesitable-img">
+                  <img src="/images/product/${product.image}" class="img-fluid w-100 rounded-top" alt="" />
+                </div>
+                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px">Special</div>
+                <div class="p-4 pb-0 rounded-bottom">
+                  <h4>${product.name}</h4>
+                  <p>${product.shortDesc}</p>
+                  <div class="d-flex justify-content-between flex-lg-wrap">
+                    <p class="text-dark fs-5 fw-bold"><fmt:formatNumber type="number" value="${product.price}" /></p>
+                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
+                      <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                      Add to cart
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-              <div class="vesitable-img">
-                <img src="client/img/vegetable-item-1.jpg" class="img-fluid w-100 rounded-top" alt="" />
-              </div>
-              <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px">Vegetable</div>
-              <div class="p-4 pb-0 rounded-bottom">
-                <h4>Parsely</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                <div class="d-flex justify-content-between flex-lg-wrap">
-                  <p class="text-dark fs-5 fw-bold">$4.99 / kg</p>
-                  <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
-                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                    Add to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-              <div class="vesitable-img">
-                <img src="client/img/vegetable-item-3.png" class="img-fluid w-100 rounded-top bg-light" alt="" />
-              </div>
-              <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px">Vegetable</div>
-              <div class="p-4 pb-0 rounded-bottom">
-                <h4>Banana</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                <div class="d-flex justify-content-between flex-lg-wrap">
-                  <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                  <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
-                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                    Add to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-              <div class="vesitable-img">
-                <img src="client/img/vegetable-item-4.jpg" class="img-fluid w-100 rounded-top" alt="" />
-              </div>
-              <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px">Vegetable</div>
-              <div class="p-4 pb-0 rounded-bottom">
-                <h4>Bell Papper</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                <div class="d-flex justify-content-between flex-lg-wrap">
-                  <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                  <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
-                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                    Add to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-              <div class="vesitable-img">
-                <img src="client/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="" />
-              </div>
-              <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px">Vegetable</div>
-              <div class="p-4 pb-0 rounded-bottom">
-                <h4>Potatoes</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                <div class="d-flex justify-content-between flex-lg-wrap">
-                  <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                  <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
-                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                    Add to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-              <div class="vesitable-img">
-                <img src="client/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="" />
-              </div>
-              <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px">Vegetable</div>
-              <div class="p-4 pb-0 rounded-bottom">
-                <h4>Parsely</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                <div class="d-flex justify-content-between flex-lg-wrap">
-                  <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                  <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
-                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                    Add to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-              <div class="vesitable-img">
-                <img src="client/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="" />
-              </div>
-              <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px">Vegetable</div>
-              <div class="p-4 pb-0 rounded-bottom">
-                <h4>Potatoes</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                <div class="d-flex justify-content-between flex-lg-wrap">
-                  <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                  <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
-                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                    Add to cart
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="border border-primary rounded position-relative vesitable-item">
-              <div class="vesitable-img">
-                <img src="client/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="" />
-              </div>
-              <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px">Vegetable</div>
-              <div class="p-4 pb-0 rounded-bottom">
-                <h4>Parsely</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                <div class="d-flex justify-content-between flex-lg-wrap">
-                  <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-                  <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
-                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                    Add to cart
-                  </a>
-                </div>
-              </div>
-            </div>
+            </c:forEach>
           </div>
         </div>
       </div>
@@ -399,10 +228,10 @@
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="client/easing/easing.min.js"></script>
-    <script src="client/lib/waypoints/waypoints.min.js"></script>
-    <script src="client/lib/lightbox/js/lightbox.min.js"></script>
-    <script src="client/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/client/easing/easing.min.js"></script>
+    <script src="/client/lib/waypoints/waypoints.min.js"></script>
+    <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="/client/js/main.js"></script>

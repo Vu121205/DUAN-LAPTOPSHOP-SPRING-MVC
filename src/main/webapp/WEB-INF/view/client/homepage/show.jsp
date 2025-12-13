@@ -1,5 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
+<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %> <%@
+taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -55,10 +55,8 @@
     </div>
     <!-- Modal Search End -->
 
-    <jsp:include page="../layout/banner.jsp" />
-
-    <jsp:include page="../layout/feature.jsp" />
-
+    <jsp:include page="../layout/banner.jsp" />    
+    
     <!-- Fruits Shop Start-->
     <div class="container-fluid fruite py-5">
       <div class="container py-5">
@@ -90,11 +88,14 @@
                           </div>
                           <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px">Fruits</div>
                           <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>${product.name}</h4>
-                            <p>${product.shortDesc}</p>
+                            <h4 style="font-size: 15px">
+                             <a href="product/${product.id}"> ${product.name}</a>
+                            </h4>
+                            <p style="font-size: 13px">${product.shortDesc}</p>
                             <div class="d-flex justify-content-between flex-lg-wrap">
-                              <p class="text-dark fs-5 fw-bold mb-0">${product.price}</p>
-                              <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                              <p style="font-size: 15px; text-align: center; width: 100%" 
+                                class="text-dark fs-5 fw-bold mb-3"><fmt:formatNumber type="number" value="${product.price}" /></p>
+                              <a href="#" class="mx-auto btn border border-secondary rounded-pill px-3 text-primary">
                                 <i class="fa fa-shopping-bag me-2 text-primary"></i>
                                 Add to cart
                               </a>
@@ -112,6 +113,10 @@
       </div>
     </div>
     <!-- Fruits Shop End-->
+
+    <jsp:include page="../layout/feature.jsp" />
+
+
 
     <jsp:include page="../layout/footer.jsp" />
 
