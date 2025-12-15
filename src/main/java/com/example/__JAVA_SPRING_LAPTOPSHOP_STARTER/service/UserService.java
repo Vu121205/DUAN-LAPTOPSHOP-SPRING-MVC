@@ -2,13 +2,11 @@ package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service;
 
 import java.util.List;
 
-import org.springframework.data.aot.RegisteredBeanAotContribution;
 import org.springframework.stereotype.Service;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Role;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.dto.RegisterDTO;
-import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.dto.registerDTO;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.RoleRepository;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.UserRepository;
 
@@ -64,5 +62,11 @@ public class UserService {
 
         return user;
     }
+
+    public boolean checkEmailExist(String email)
+    {
+        return this.userRepository.existsByEmail(email);
+    }
+
 
 }

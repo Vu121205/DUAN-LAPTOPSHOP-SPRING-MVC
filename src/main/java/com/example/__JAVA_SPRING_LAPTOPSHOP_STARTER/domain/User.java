@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.validation.OnCreate;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.validation.OnUpdate;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.validator.StrongPassword;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +36,7 @@ public class User {
 
     @NotNull
     @Size(min = 3, message = "Phải có tối thiểu 3 ký tự", groups = {OnCreate.class, OnUpdate.class})
+    @StrongPassword(message = "Password phải có 8 ký tự")
     private String fullName;
 
     private String address;

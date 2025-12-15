@@ -1,5 +1,8 @@
 package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.dto;
 
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class RegisterDTO {
     private String firstName;
     private String lastName;

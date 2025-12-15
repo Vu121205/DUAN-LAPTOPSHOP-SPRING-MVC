@@ -29,44 +29,48 @@
           <div class="col-12 col-lg-9 col-xl-7">
             <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
               <div class="card-body p-4 p-md-5">
-                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Create Account</h3>
 
                 <form:form method="post" action="/register" modelAttribute="registerUser">
+                  <c:set var="errorPassword">
+                    <form:errors path="confirmPassword" cssClass="invalid-feedback" />
+                  </c:set>
+                  <c:set var="errorEmail">
+                    <form:errors path="email" cssClass="invalid-feedback" />
+                  </c:set>
                   <div class="row">
                     <div class="col-md-6 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <form:input type="text" id="firstName" class="form-control form-control-lg" path="firstName" />
-                        <label class="form-label" for="firstName">First Name</label>
+                        <form:input type="text" class="form-control form-control-lg" placeholder="FirstName" path="firstName" />
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <form:input type="text" id="lastName" class="form-control form-control-lg" path="lastName" />
-                        <label class="form-label" for="lastName">Last Name</label>
+                        <form:input type="text" class="form-control form-control-lg" placeholder="lastName" path="lastName" />
                       </div>
                     </div>
-                    <div class="col-md-12 mb-4 pb-2">
+                    <div class="col-md-12 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <form:input type="email" id="emailAddress" class="form-control form-control-lg" path="email" />
-                        <label class="form-label" for="emailAddress">Email</label>
+                        <form:input type="email" class="form-control form-control-lg ${not empty errorEmail? 'is-invalid' : ''}" placeholder="email" path="email" />
+                        ${errorEmail}
                       </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <form:input type="password" id="emailAddress" class="form-control form-control-lg" path="password" />
-                        <label class="form-label" for="emailAddress">Password</label>
+                        <form:input type="password" class="form-control form-control-lg ${not empty errorPassword? 'is-invalid' : ''}" placeholder="password" path="password" />
+                        ${errorPassword}
                       </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <form:input type="password" id="emailAddress" class="form-control form-control-lg" path="confirmPassword" />
-                        <label class="form-label" for="emailAddress">Confirm Password</label>
+                        <form:input type="password" class="form-control form-control-lg" placeholder="confirm password" path="confirmPassword" />
                       </div>
                     </div>
                   </div>
                   <div class="mt-4 pt-2">
                     <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Submit" />
                   </div>
+                  <div class="mt-2 text-center"><a href="/login">Have an account? Go to login</a></div>
                 </form:form>
               </div>
             </div>
