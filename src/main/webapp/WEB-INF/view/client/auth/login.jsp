@@ -38,9 +38,14 @@
                         Invalid email or password
                       </div>
                   </c:if>
+                  <c:if test="${param.logout != null}">
+                      <div class="my-2" style="color: rgb(0, 255, 106)">
+                        Logout success
+                      </div>
+                  </c:if>
                   <div class="form-outline mb-4">
                     <input type="email" class="form-control form-control-lg" placeholder="Email" name="username" />
-                  </div>
+                  </div> 
 
                   <div class="form-outline mb-4">
                     <input type="password" class="form-control form-control-lg" placeholder="Password" name="password" />
