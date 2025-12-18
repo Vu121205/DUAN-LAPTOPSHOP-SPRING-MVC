@@ -55,15 +55,15 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
     </div>
     <!-- Modal Search End -->
 
-    <jsp:include page="../layout/banner.jsp" />    
-    
+    <jsp:include page="../layout/banner.jsp" />
+
     <!-- Fruits Shop Start-->
     <div class="container-fluid fruite py-5">
       <div class="container py-5">
         <div class="tab-class text-center">
           <div class="row g-4">
             <div class="col-md-6 text-md-start">
-              <h1>Sản phẩm nổi bật</h1>
+              <h1 id="product">Sản phẩm nổi bật</h1>
             </div>
             <div class="col-md-6 text-md-end">
               <ul class="nav nav-pills d-inline-flex text-center mb-5">
@@ -89,12 +89,11 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                           <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px">Fruits</div>
                           <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                             <h4 style="font-size: 15px">
-                             <a href="product/${product.id}"> ${product.name}</a>
+                              <a href="product/${product.id}">${product.name}</a>
                             </h4>
                             <p style="font-size: 13px">${product.shortDesc}</p>
                             <div class="d-flex justify-content-between flex-lg-wrap">
-                              <p style="font-size: 15px; text-align: center; width: 100%" 
-                                class="text-dark fs-5 fw-bold mb-3"><fmt:formatNumber type="number" value="${product.price}" /></p>
+                              <p style="font-size: 15px; text-align: center; width: 100%" class="text-dark fs-5 fw-bold mb-3"><fmt:formatNumber type="number" value="${product.price}" /></p>
                               <a href="#" class="mx-auto btn border border-secondary rounded-pill px-3 text-primary">
                                 <i class="fa fa-shopping-bag me-2 text-primary"></i>
                                 Add to cart
@@ -115,8 +114,6 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
     <!-- Fruits Shop End-->
 
     <jsp:include page="../layout/feature.jsp" />
-
-
 
     <jsp:include page="../layout/footer.jsp" />
 

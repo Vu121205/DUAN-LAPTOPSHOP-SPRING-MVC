@@ -38,10 +38,14 @@
                   <c:set var="errorEmail">
                     <form:errors path="email" cssClass="invalid-feedback" />
                   </c:set>
+                  <c:set var="errorFirstName">
+                    <form:errors path="firstName" cssClass="invalid-feedback" />
+                  </c:set>
                   <div class="row">
                     <div class="col-md-6 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <form:input type="text" class="form-control form-control-lg" placeholder="FirstName" path="firstName" />
+                        <form:input type="text" class="form-control form-control-lg ${not empty errorFirstName? 'is-invalid' : ''}" placeholder="FirstName" path="firstName" />
+                        ${errorFirstName}
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
@@ -57,13 +61,13 @@
                     </div>
                     <div class="col-12 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <form:input type="password" class="form-control form-control-lg ${not empty errorPassword? 'is-invalid' : ''}" placeholder="password" path="password" />
+                        <form:input type="password" class="form-control form-control-lg ${not empty errorPassword? 'is-invalid' : ''}" placeholder="password" path="confirmPassword" />
                         ${errorPassword}
                       </div>
                     </div>
                     <div class="col-12 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <form:input type="password" class="form-control form-control-lg" placeholder="confirm password" path="confirmPassword" />
+                        <form:input type="password" class="form-control form-control-lg" placeholder="confirm password" path="password" />
                       </div>
                     </div>
                   </div>

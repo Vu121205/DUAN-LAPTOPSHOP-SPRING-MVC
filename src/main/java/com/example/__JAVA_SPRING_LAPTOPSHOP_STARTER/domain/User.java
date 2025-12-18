@@ -31,12 +31,11 @@ public class User {
 
 
     @NotNull
-    @Size(min = 2, message = "Phải có tối thiểu 2 ký tự", groups = {OnCreate.class})
+    @StrongPassword(message = "Password phải có 8 ký tự")
     private String password;
 
     @NotNull
-    @Size(min = 3, message = "Phải có tối thiểu 3 ký tự", groups = {OnCreate.class, OnUpdate.class})
-    @StrongPassword(message = "Password phải có 8 ký tự")
+    @Size(min = 3, message = "Phải có tối thiểu 3 ký tự", groups = {OnCreate.class, OnUpdate.class})   
     private String fullName;
 
     private String address;

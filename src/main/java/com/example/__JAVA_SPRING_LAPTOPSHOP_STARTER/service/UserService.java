@@ -68,5 +68,10 @@ public class UserService {
         return this.userRepository.existsByEmail(email);
     }
 
+    public User getUserByEmail(String emali)
+    {
+        return this.userRepository.findByEmail(emali);
+    }
+
 
 }
