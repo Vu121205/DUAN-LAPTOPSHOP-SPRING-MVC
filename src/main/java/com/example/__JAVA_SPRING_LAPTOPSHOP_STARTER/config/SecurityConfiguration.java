@@ -1,16 +1,17 @@
 package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.config;
 
-import org.apache.tomcat.util.net.DispatchType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.CustomUserDetailsService;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UserService;
@@ -46,7 +47,7 @@ public class SecurityConfiguration {
     @Bean
     public AuthenticationSuccessHandler customSuccessHandler()
     {
-        return new CustomSuccessHandle();
+        return new CustomSuccessHandler();
     }
 
     @Bean
@@ -57,7 +58,18 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/","/login", "/product/**",  "/client/**", "/css/**", "/js/**", "/images/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
+
                 .anyRequest().authenticated())
+                .sessionManagement((sessionManagement) -> sessionManagement
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                .invalidSessionUrl("/logout?expired")
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(false))
+
+                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+
+                .rememberMe(rememberMe -> rememberMe
+                .rememberMeServices(rememberMeServices()))
                 
             .formLogin(formLogin -> formLogin
                 .loginPage("/login")
@@ -67,6 +79,15 @@ public class SecurityConfiguration {
                 .exceptionHandling(ex->ex.accessDeniedPage("/access-deny"));
 
         return http.build();
+    }
+
+    @Bean
+    public SpringSessionRememberMeServices rememberMeServices() {
+        SpringSessionRememberMeServices rememberMeServices =
+                new SpringSessionRememberMeServices();
+        // optionally customize
+        rememberMeServices.setAlwaysRemember(true);
+        return rememberMeServices;
     }
 
 

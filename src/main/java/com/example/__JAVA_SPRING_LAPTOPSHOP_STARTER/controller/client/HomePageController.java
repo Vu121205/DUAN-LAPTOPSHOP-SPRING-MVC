@@ -16,6 +16,8 @@ import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.dto.RegisterDTO;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.ProductService;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +38,7 @@ public class HomePageController {
     public String getHomePage(Model model) {
         List<Product> products = this.productService.fetchProducts();
         model.addAttribute("products", products);
+
         return "client/homepage/show";
     }
 
