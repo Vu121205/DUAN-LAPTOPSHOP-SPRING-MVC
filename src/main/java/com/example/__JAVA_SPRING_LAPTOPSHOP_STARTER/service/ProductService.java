@@ -75,8 +75,6 @@ public class ProductService {
                 Product realProduct = product.get();
 
                 //check sản phẩm đã từng được thêm vào giỏ hàng chưa
-                boolean isExistProductInCart = this.cartDetailRepository.existsByCartAndProduct(cart, realProduct);
-
                 CartDetail oldDetail = this.cartDetailRepository.findByCartAndProduct(cart, realProduct);
 
                 if(oldDetail == null)
@@ -88,16 +86,15 @@ public class ProductService {
                     cartDetail.setQuantity(1);
                     this.cartDetailRepository.save(cartDetail);
 
-                    
-                }else{
-                    oldDetail.setQuantity(oldDetail.getQuantity() + 1);
-                    this.cartDetailRepository.save(oldDetail);
-                }
                     //update sum in cart
                     int s = cart.getSum() + 1;
                     cart.setSum(s);
                     this.cartRepository.save(cart);
                     session.setAttribute("sum", s);
+                }else{
+                    oldDetail.setQuantity(oldDetail.getQuantity() + 1);
+                    this.cartDetailRepository.save(oldDetail);
+                }
 
             }
 

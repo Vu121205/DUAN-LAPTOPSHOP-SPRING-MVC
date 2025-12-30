@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %> <%@
+<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> <%@
 taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,16 +75,16 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Products</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Giá cả</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Xử lý</th>
               </tr>
             </thead>
             <tbody>
-              <c:forEach items="${cartDetails}" var="cartDetail">
+              <c:forEach var="cartDetail" items="${cartDetails}">
                 <tr>
                   <th scope="row">
                     <div class="d-flex align-items-center">
@@ -105,21 +105,27 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                   <td>
                     <div class="input-group quantity mt-4" style="width: 100px">
                       <div class="input-group-btn">
-                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                        <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
                           <i class="fa fa-minus"></i>
                         </button>
                       </div>
-                      <input type="text" class="form-control form-control-sm text-center border-0" value="${cartDetail.quantity}" />
+                      <input
+                        type="text"
+                        class="form-control form-control-sm text-center border-0"
+                        value="${cartDetail.quantity}"
+                        data-cart-detail-id="${cartDetail.id}"
+                        data-cart-detail-price="${cartDetail.price}"
+                      />
                       <div class="input-group-btn">
-                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                        <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
                           <i class="fa fa-plus"></i>
                         </button>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <p class="mb-0 mt-4">
-                      <fmt:formatNumber type="number" value="${totalPrice}" />
+                    <p class="mb-0 mt-4" data-cart-detail-id="${cartDetail.id}">
+                      <fmt:formatNumber type="number" value="${cartDetail.price * cartDetail.quantity}" />
                       đ
                     </p>
                   </td>
@@ -143,7 +149,10 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                 </h1>
                 <div class="d-flex justify-content-between mb-4">
                   <h5 class="mb-0 me-4">Tạm tính:</h5>
-                  <p class="mb-0">$96.00</p>
+                  <p class="mb-0" data-cart-total-price="${totalPrice}">
+                    <fmt:formatNumber type="number" value="${totalPrice}" />
+                    đ
+                  </p>
                 </div>
                 <div class="d-flex justify-content-between">
                   <h5 class="mb-0 me-4">Phí vận chuyển</h5>
@@ -154,8 +163,11 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                 <p class="mb-0 text-end">Shipping to Ukraine.</p>
               </div>
               <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                <h5 class="mb-0 ps-4 me-4">Tổng cộng:</h5>
-                <p class="mb-0 pe-4">$99.00</p>
+                <h5 class="mb-0 ps-4 me-4">Tổng số tiền:</h5>
+                <p class="mb-0 pe-4" data-cart-total-price="${totalPrice}">
+                  <fmt:formatNumber type="number" value="${totalPrice}" />
+                  đ
+                </p>
               </div>
               <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Xác nhận đơn hàng</button>
             </div>
@@ -171,7 +183,7 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/client/easing/easing.min.js"></script>
+    <script src="/client/lib/easing/easing.min.js"></script>
     <script src="/client/lib/waypoints/waypoints.min.js"></script>
     <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
     <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
