@@ -130,9 +130,12 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                     </p>
                   </td>
                   <td>
-                    <button class="btn btn-md rounded-circle bg-light border mt-4">
-                      <i class="fa fa-times text-danger"></i>
-                    </button>
+                    <form:form method="post" action="/delete-cart-product/${cartDetail.id}">
+                      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                      <button class="btn btn-md rounded-circle bg-light border mt-4">
+                        <i class="fa fa-times text-danger"></i>
+                      </button>
+                    </form:form>
                   </td>
                 </tr>
               </c:forEach>

@@ -1,5 +1,10 @@
 package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository;
 
+import java.lang.StackWalker.Option;
+import java.util.Optional;
+
+import javax.swing.text.Caret;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +17,6 @@ public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
 
     boolean existsByCartAndProduct(Cart cart, Product product);
     CartDetail findByCartAndProduct(Cart cart, Product product);
+    Optional<CartDetail> findById(long id);
+
 }
