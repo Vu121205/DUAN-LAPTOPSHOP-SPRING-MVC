@@ -134,7 +134,7 @@
   //     button.parent().parent().find('input').val(newVal);
   //   });
   // });
-  
+
   $('.quantity button').on('click', function () {
     let change = 0;
 
@@ -156,30 +156,33 @@
     const input = button.parent().parent().find('input');
     input.val(newVal);
 
+    //set form index
+    const index = input.attr("data-cart-detail-index")
+    const el = document.getElementById(`cartDetails${index}.quantity`);
+    $(el).val(newVal);
+
     // get price
-    const price = input.attr("data-cart-detail-price");
-    const id = input.attr("data-cart-detail-id");
+    const price = input.attr('data-cart-detail-price');
+    const id = input.attr('data-cart-detail-id');
 
     const priceElement = $(`p[data-cart-detail-id='${id}']`);
     if (priceElement) {
       const newPrice = +price * newVal;
-      priceElement.text(formatCurrency(newPrice.toFixed(2)) + " đ");
+      priceElement.text(formatCurrency(newPrice.toFixed(2)) + ' đ');
     }
 
     // update total cart price
     const totalPriceElement = $('p[data-cart-total-price]');
 
     if (totalPriceElement && totalPriceElement.length) {
-      const currentTotal = totalPriceElement
-        .first()
-        .attr("data-cart-total-price");
+      const currentTotal = totalPriceElement.first().attr('data-cart-total-price');
 
       let newTotal = +currentTotal;
 
       if (change === 0) {
         newTotal = +currentTotal;
       } else {
-        newTotal = change * (+price) + (+currentTotal);
+        newTotal = change * +price + +currentTotal;
       }
 
       // reset change
@@ -188,12 +191,10 @@
       // update
       totalPriceElement?.each(function (index, element) {
         // update text
-        $(totalPriceElement[index]).text(
-          formatCurrency(newTotal.toFixed(2)) + " đ");
+        $(totalPriceElement[index]).text(formatCurrency(newTotal.toFixed(2)) + ' đ');
 
         // update data-attribute
-        $(totalPriceElement[index]).attr(
-          "data-cart-total-price", newTotal);
+        $(totalPriceElement[index]).attr('data-cart-total-price', newTotal);
       });
     }
   });
@@ -209,6 +210,4 @@
 
     return formatted;
   }
-  
 })(jQuery);
-
