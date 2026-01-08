@@ -15,7 +15,7 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long quatity;
+    private long quantity;
     private double price;
 
     //order_id: long
@@ -26,7 +26,7 @@ public class OrderDetail {
     //product_id: long
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product products;
+    private Product product;
 
     public long getId() {
         return id;
@@ -36,12 +36,12 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public long getQuatity() {
-        return quatity;
+    public long getQuantity() {
+        return quantity;
     }
 
-    public void setQuatity(long quatity) {
-        this.quatity = quatity;
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
     }
 
     public double getPrice() {
@@ -60,12 +60,12 @@ public class OrderDetail {
         this.order = order;
     }
 
-    public Product getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(Product products) {
-        this.products = products;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     

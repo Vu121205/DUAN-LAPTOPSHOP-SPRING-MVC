@@ -2,6 +2,7 @@ package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +29,7 @@ public class Cart {
     private User user;
 
     //cart details
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     List<CartDetail> cartDetails;
 
     public long getId() {

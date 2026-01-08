@@ -10,5 +10,6 @@ import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long>{
     Cart findByUser(User user);
+    void deleteCartById(long id);
     
 }

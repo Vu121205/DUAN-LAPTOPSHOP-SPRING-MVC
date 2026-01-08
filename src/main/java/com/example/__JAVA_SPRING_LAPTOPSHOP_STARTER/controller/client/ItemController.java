@@ -14,7 +14,10 @@ import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Cart;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.CartDetail;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Product;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.CartDetailRepository;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.CartRepository;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.ProductService;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -28,9 +31,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ItemController {
     private final ProductService productService;
+    private final CartRepository cartRepository;
+    private final CartDetailRepository cartDetailRepository;
+    private final UserService userService;
 
-    public ItemController(ProductService productService) {
+    public ItemController(ProductService productService, CartRepository cartRepository,
+            CartDetailRepository cartDetailRepository, UserService userService) {
         this.productService = productService;
+        this.cartRepository = cartRepository;
+        this.cartDetailRepository = cartDetailRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/product/{id}")
@@ -126,11 +136,24 @@ public class ItemController {
     public String handlePlaceOrder(
             HttpServletRequest request, 
             @RequestParam("receiverName") String receiverName,
-            @RequestParam("receiverPhone") String receiverPhone,
-            @RequestParam("receiverAddress") String receiverAddress) {
+            @RequestParam("receiverAddress") String receiverAddress,
+            @RequestParam("receiverPhone") String receiverPhone) {
+
+        User currentUser = new User();
         HttpSession session = request.getSession(false);
-        return "redirect:/";
+        long id = (long) session.getAttribute("id");
+        currentUser.setId(id);
+
+        this.productService.handlePlaceOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
+
+        return "redirect:/thanks";
     }
+
+    @GetMapping("/thanks")
+    public String getThanksPage(Model model) {
+        return "client/cart/thanks";
+    }
+    
     
     
 }

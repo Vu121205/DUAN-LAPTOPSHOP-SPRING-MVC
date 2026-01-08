@@ -6,6 +6,7 @@ import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.validation.OnCreate;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.validation.OnUpdate;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.validator.StrongPassword;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -53,7 +54,9 @@ public class User {
     private List<Order> orders;
 
     //cart
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
     private Cart cart;
 
     public long getId() {
