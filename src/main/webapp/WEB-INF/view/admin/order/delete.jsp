@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - Vudoan</title>
+    <title>Delete order - Vudoan</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   </head>
@@ -18,40 +18,26 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4">Manage Orders</h1>
+            <h1 class="mt-4">Manage Users</h1>
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item active">Users</li>
             </ol>
-            <div>Table Order</div>
-            <div class="pt-3">
-              <table class="table table-hover table-bordered">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Total Price</th>
-                    <th>User</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <c:forEach var="order" items="${orders}">
-                    <tr>
-                      <th>${order.id}</th>
-                      <td>${order.totalPrice}</td>
-                      <td>${order.user.fullName}</td>
-                      <td>${order.status}</td>
-                      <td>
-                        <a href="/admin/order/${order.id}" type="button" class="btn btn-success">View</a>
-                        <a href="/admin/order/update/${order.id}" type="button" class="btn btn-warning">Update</a>
-                        <a href="/admin/order/delete/${order.id}" type="button" class="btn btn-danger">Delete</a>
-                      </td>
-                    </tr>
-                  </c:forEach>
-                </tbody>
-              </table>
-              
+            <div class="container mt-5">
+              <div class="row">
+                <div class="mx-auto">
+                  <h3>Delete order with id = ${id}</h3>
+                </div>
+                <hr />
+                <div class="alert alert-danger">Are you sure to delete with order ?</div>
+                <form:form method="post" action="/admin/order/delete" modelAttribute="newOrder">
+                  <div class="mb-3" style="display: none">
+                    <label class="form-label">Id:</label>
+                    <form:input value="${id}" type="text" class="form-control" path="id" />
+                  </div>
+                  <button class="btn btn-danger">Confirm</button>
+                </form:form>
+              </div>
             </div>
           </div>
         </main>

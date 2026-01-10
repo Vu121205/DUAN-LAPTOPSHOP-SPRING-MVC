@@ -1,4 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %> <%@
+taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +35,7 @@
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">ID: ${product.id}</li>
                       <li class="list-group-item">Name: ${product.name}</li>
-                      <li class="list-group-item">Name: ${product.price}</li>
+                      <li class="list-group-item">Giá: ${product.price}</li>
                     </ul>
 
                     <a href="http://localhost:8080/admin/product" class="btn btn-success mt-3">Back</a>

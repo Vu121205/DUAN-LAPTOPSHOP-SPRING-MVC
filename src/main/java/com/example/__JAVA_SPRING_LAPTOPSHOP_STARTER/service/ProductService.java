@@ -1,6 +1,5 @@
 package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +18,6 @@ import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.OrderRepository;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.ProductRepository;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 
 @Service
 public class ProductService {
@@ -160,14 +158,6 @@ public class ProductService {
 
     public void handlePlaceOrder(User user, HttpSession session, String receiverName, String receiverAddress, String receiverPhone) 
     {
-        Order order = new Order();
-        order.setUser(user);
-        order.setReceiverName(receiverName);
-        order.setReceiverAddress(receiverAddress);
-        order.setReceiverPhone(receiverPhone);
-        this.orderRepository.save(order);
-
-
         //step 1: get cart by user
         Cart cart = this.cartRepository.findByUser(user);
         if (cart != null)
@@ -176,6 +166,23 @@ public class ProductService {
 
             if (cartDetails != null) {
 
+                //create order
+                Order order = new Order();
+                order.setUser(user);
+                order.setReceiverName(receiverName);
+                order.setReceiverAddress(receiverAddress);
+                order.setReceiverPhone(receiverPhone);
+                order.setStatus("PENDING");
+
+                double sum = 0;
+                for(CartDetail cd : cartDetails)
+                {
+                    sum += cd.getPrice();
+                }
+                order.setTotalPrice(sum);
+                order = this.orderRepository.save(order);
+
+                //create orderDetail
                 for (CartDetail cd : cart.getCartDetails()) {
                     OrderDetail od = new OrderDetail();
                     od.setOrder(order);

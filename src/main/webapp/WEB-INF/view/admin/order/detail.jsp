@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - Vudoan</title>
+    <title>Product - Vudoan</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   </head>
@@ -18,40 +18,35 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4">Manage Orders</h1>
+            <h1 class="mt-4">Manage Users</h1>
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item active">Users</li>
             </ol>
-            <div>Table Order</div>
             <div class="pt-3">
               <table class="table table-hover table-bordered">
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Total Price</th>
-                    <th>User</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Sản phẩm</th>
+                    <th>Tên</th>
+                    <th>Giá cả</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <c:forEach var="order" items="${orders}">
+                  <c:forEach var="orderDetail" items="${orderDetails}">
                     <tr>
-                      <th>${order.id}</th>
+                      <td><img src="/images/product/${orderDetail.product.image}" class="rounded-2" width="150px" height="150px" alt="card image cap" /></td>
+                      <td>${orderDetail.product.name}</td>
+                      <td>${orderDetail.price}</td>
+                      <td>${orderDetail.quantity}</td>
                       <td>${order.totalPrice}</td>
-                      <td>${order.user.fullName}</td>
-                      <td>${order.status}</td>
-                      <td>
-                        <a href="/admin/order/${order.id}" type="button" class="btn btn-success">View</a>
-                        <a href="/admin/order/update/${order.id}" type="button" class="btn btn-warning">Update</a>
-                        <a href="/admin/order/delete/${order.id}" type="button" class="btn btn-danger">Delete</a>
-                      </td>
                     </tr>
                   </c:forEach>
                 </tbody>
               </table>
-              
+              <a class="btn btn-success" href="/admin/order">Back</a>
             </div>
           </div>
         </main>
