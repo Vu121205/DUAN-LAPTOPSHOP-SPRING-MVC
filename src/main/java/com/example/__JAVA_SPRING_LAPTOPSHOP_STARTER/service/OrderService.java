@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Order;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.OrderDetail;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.OrderDetailRepository;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.OrderRepository;
 
@@ -53,6 +54,11 @@ public class OrderService {
             currentOrder.setStatus(order.getStatus());
             this.orderRepository.save(currentOrder);
         }
+    }
+
+    public List<Order> fetchOrderByUser(User user)
+    {
+        return this.orderRepository.findByUser(user);
     }
 
 
