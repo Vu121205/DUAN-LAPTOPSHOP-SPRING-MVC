@@ -43,7 +43,7 @@
                     <tr>
                       <th>${product.id}</th>
                       <td>${product.name}</td>
-                      <td>${product.price}</td>
+                      <td><fmt:formatNumber type="number" value="${product.price}" /></td>
                       <td>${product.factory}</td>
                       <td>
                         <a href="/admin/product/${product.id}" type="button" class="btn btn-success">View</a>
@@ -54,6 +54,25 @@
                   </c:forEach>
                 </tbody>
               </table>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item">
+                    <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}" href="/admin/product?page=${currentPage - 1}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+
+                  <C:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
+                    <li class="page-item"><a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}" href="/admin/product?page=${loop.index + 1}">${loop.index + 1}</a></li>
+                  </C:forEach>
+        
+                  <li class="page-item">
+                    <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}" href="/admin/product?page=${currentPage + 1}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </main>

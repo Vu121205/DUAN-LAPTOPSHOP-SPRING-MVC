@@ -27,9 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-
-
-
 @Controller
 public class ItemController {
     private final ProductService productService;
@@ -52,7 +49,7 @@ public class ItemController {
         model.addAttribute("product", product);
         model.addAttribute("id", id);
 
-        List<Product> products = this.productService.fetchProducts();
+        List<Product> products = this.productService.findProducts();
         model.addAttribute("products", products);
         
         return "client/product/detail";

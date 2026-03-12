@@ -35,7 +35,7 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">ID: ${product.id}</li>
                       <li class="list-group-item">Name: ${product.name}</li>
-                      <li class="list-group-item">Giá: ${product.price}</li>
+                      <li class="list-group-item"><fmt:formatNumber type="number" value="${product.price}" />đ</li>
                     </ul>
 
                     <a href="http://localhost:8080/admin/product" class="btn btn-success mt-3">Back</a>
