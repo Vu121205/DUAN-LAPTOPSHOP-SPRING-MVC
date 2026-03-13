@@ -25,6 +25,8 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -46,7 +48,7 @@ public class HomePageController {
     @GetMapping("/")
     public String getHomePage(Model model) {
         // List<Product> products = this.productService.fetchProducts();
-        Pageable pageable = PageRequest.of(0,10);
+        Pageable pageable = PageRequest.of(0, 10);
         Page<Product> prs = this.productService.fetchProducts(pageable);
         List<Product> products = prs.getContent();
 
@@ -102,6 +104,12 @@ public class HomePageController {
         
         return "client/cart/order-history";
     }
+
+    @GetMapping("/product")
+    public String getProducts(Model model) {
+        return "client/homepage/product";
+    }
+    
     
 
 }

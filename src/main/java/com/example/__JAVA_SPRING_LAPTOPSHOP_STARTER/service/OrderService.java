@@ -3,6 +3,8 @@ package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Order;
@@ -21,9 +23,9 @@ public class OrderService {
         this.orderDetailRepository = orderDetailRepository;
     }
 
-    public List<Order> getAllOrder()
+    public Page<Order> getAllOrders(Pageable pageable)
     {
-        return this.orderRepository.findAll();
+        return this.orderRepository.findAll(pageable);
     }
 
     public Optional<Order> fetchOrderById(long id)

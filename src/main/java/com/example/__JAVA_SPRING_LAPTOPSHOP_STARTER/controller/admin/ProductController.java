@@ -22,6 +22,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 @Controller
 public class ProductController {
     private final UploadService uploadService;
@@ -34,7 +35,7 @@ public class ProductController {
     }
 
     @GetMapping("/admin/product")
-    public String getProduct(Model model, @RequestParam("page")Optional<String> pageOptional) {
+    public String getProduct(Model model, @RequestParam("page") Optional<String> pageOptional) {
         int page = 1;
 
         try {
@@ -48,7 +49,7 @@ public class ProductController {
             // TODO: handle exception
         }
 
-        Pageable pageable = PageRequest.of(page - 1, 5);
+        Pageable pageable = PageRequest.of(page - 1, 2);
 
         Page<Product> prs = this.productService.fetchProducts(pageable);
         List<Product> listProducts = prs.getContent();
