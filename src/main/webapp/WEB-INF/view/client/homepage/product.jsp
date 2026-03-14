@@ -127,7 +127,7 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                       </div>
                     </div>
                     <div class="d-flex justify-content-center my-4">
-                            <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Lọc sản phẩm</a>
+                            <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-50">Lọc sản phẩm</a>
                      </div>
                   </div>
                 </div>
@@ -135,42 +135,55 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
               <!-- list products -->
               <div class="col-lg-8">
                 <div class="row g-4 justify-content-center">
-                  <div class="col-md-6 col-lg-6 col-xl-4">
+                  <c:forEach var="product" items="${products}">
+                    <div class="col-md-6 col-lg-6 col-xl-4">
                     <div class="rounded position-relative fruite-item">
                       <div class="fruite-img">
-                        <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="" />
+                        <img src="/images/product/${product.image}" class="img-fluid w-100 rounded-top" alt="" />
                       </div>
-                      <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px">Fruits</div>
+                      <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px">Hot</div>
                       <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>Grapes</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                        <h4>${product.name}</h4>
+                        <p>${product.shortDesc}</p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
-                          <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                          <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
-                            <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                            Add to cart
-                          </a>
+                          <form action="/add-product-to-cart/${product.id}" method="post">
+                                <div>
+                                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                </div>
+                                <button href="#" class="mx-auto btn border border-secondary rounded-pill px-3 text-primary">
+                                  <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                                  Add to cart
+                                </button>
+                              </form>
                         </div>
                       </div>
                     </div>
                   </div>
+                  </c:forEach>
                   <div class="col-12">
-                    <div class="pagination d-flex justify-content-center mt-5">
-                      <a href="#" class="rounded">&laquo;</a>
-                      <a href="#" class="active rounded">1</a>
-                      <a href="#" class="rounded">2</a>
-                      <a href="#" class="rounded">3</a>
-                      <a href="#" class="rounded">4</a>
-                      <a href="#" class="rounded">5</a>
-                      <a href="#" class="rounded">6</a>
-                      <a href="#" class="rounded">&raquo;</a>
-                    </div>
+                    <nav aria-label="Page navigation example">
+                <ul class="pagination d-flex justify-content-center mt-5">
+                  <li class="page-item">
+                    <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'} rounded" href="/product?page=${currentPage - 1}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+
+                  <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
+                    <li class="page-item"><a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'} rounded" href="/product?page=${loop.index + 1}">${loop.index + 1}</a></li>
+                </c:forEach>
+        
+                  <li class="page-item">
+                    <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'} rounded" href="/product?page=${currentPage + 1}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
                   </div>
                 </div>
               </div>
-            </div>
           </div>
-        </div>
       </div>
     </div>
 

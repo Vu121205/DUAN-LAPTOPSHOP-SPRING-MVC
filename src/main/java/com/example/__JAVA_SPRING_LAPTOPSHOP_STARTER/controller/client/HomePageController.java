@@ -1,6 +1,7 @@
 package com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.controller.client;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -106,10 +107,31 @@ public class HomePageController {
     }
 
     @GetMapping("/product")
-    public String getProducts(Model model) {
+    public String getProducts(Model model, @RequestParam("page") Optional<String> pageOptional) {
+
+       int page = 1;
+
+        try {
+            if(pageOptional.isPresent())
+            {
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                // page = 1;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        Pageable pageable = PageRequest.of(page - 1, 6);
+
+        Page<Product> prs = this.productService.fetchProducts(pageable);
+        List<Product> listProducts = prs.getContent();
+        model.addAttribute("products", listProducts);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", prs.getTotalPages());
+
         return "client/homepage/product";
     }
     
-    
-
 }
