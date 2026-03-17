@@ -145,6 +145,7 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                       <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                         <h4>${product.name}</h4>
                         <p>${product.shortDesc}</p>
+                        <p style="font-size: 15px; width: 100%" class="text-dark fs-5 fw-bold mb-3"><fmt:formatNumber type="number" value="${product.price}" /></p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
                           <form action="/add-product-to-cart/${product.id}" method="post">
                                 <div>

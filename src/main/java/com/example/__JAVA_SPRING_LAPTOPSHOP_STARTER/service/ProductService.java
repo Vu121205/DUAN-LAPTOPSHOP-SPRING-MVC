@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Cart;
@@ -12,12 +13,14 @@ import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.CartDetail;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Order;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.OrderDetail;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Product;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.Product_;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.domain.User;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.CartDetailRepository;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.CartRepository;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.OrderDetailRepository;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.OrderRepository;
 import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.repository.ProductRepository;
+import com.example.__JAVA_SPRING_LAPTOPSHOP_STARTER.service.specification.ProductSpecs;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -50,6 +53,51 @@ public class ProductService {
     public Page<Product> fetchProducts(Pageable page)
     {
         return this.productRepository.findAll(page);
+    }
+
+    // public Page<Product> fetchProductsWithSpec(Pageable page, String name)
+    // {
+    //     return this.productRepository.findAll(ProductSpecs.nameLike(name), page);
+    // }
+
+    // case 1
+    // public Page<Product> fetchProductsWithSpec(Pageable page, double Price)
+    // {
+    //     return this.productRepository.findAll(ProductSpecs.minPrice(Price), page);
+    // }
+
+    //case 2
+    // public Page<Product> fetchProductsWithSpec(Pageable page, double Price)
+    // {
+    //     return this.productRepository.findAll(ProductSpecs.maxPrice(Price), page);
+    // }
+
+    //case 3
+    // public Page<Product> fetchProductsWithSpec(Pageable page, String factory)
+    // {
+    //     return this.productRepository.findAll(ProductSpecs.matchFactory(factory), page);
+    // }
+    
+    //case 4
+    // public Page<Product> fetchProductsWithSpec(Pageable page, List<String> factory)
+    // {
+    //     return this.productRepository.findAll(ProductSpecs.matchListFactory(factory), page);
+    // }
+
+    public Page<Product> fetchProductsWithSpec(Pageable page, String price)
+    {
+        if(price.equals("10-toi-15-trieu"))
+        {
+            double min = 10000000;
+            double max = 15000000;
+            return this.productRepository.findAll(Specification.matchPrice(min, max), page);
+
+        }else if (price.equals("15-toi-30-trieu")) {
+            double min = 15000000;
+            double max = 30000000;
+            return this.productRepository.findAll(Specification.matchPrice(min, max), page);
+        }else 
+            return this.productRepository.findAll(page);
     }
 
     public List<Product> findProducts()
