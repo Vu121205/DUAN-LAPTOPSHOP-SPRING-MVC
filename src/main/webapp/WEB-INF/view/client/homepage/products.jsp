@@ -94,34 +94,34 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                       <div class="col-12" id="priceFilter">
                         <div class="mb-2"><b>Mức giá</b></div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" name="radio-sort" value="Dưới 10 triệu" id="price-1" />
+                          <input class="form-check-input" type="checkbox" name="radio-sort" value="duoi-10-trieu" id="price-1" />
                           <label class="form-check-label" for="price-1">Dưới 10 triệu</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" name="radio-sort" value="10 - 15 triệu" id="price-2" />
+                          <input class="form-check-input" type="checkbox" name="radio-sort" value="10-15-trieu" id="price-2" />
                           <label class="form-check-label" for="price-2">10 - 15 triệu</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" name="radio-sort" value="15 - 20 triệu" id="price-3" />
+                          <input class="form-check-input" type="checkbox" name="radio-sort" value="15-20-trieu" id="price-3" />
                           <label class="form-check-label" for="price-3">15 - 20 triệu</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" name="radio-sort" value="20 - 25 triệu" id="price-4" />
-                          <label class="form-check-label" for="price-4">20 - 25 triệu</label>
+                          <input class="form-check-input" type="checkbox" name="radio-sort" value="tren-20-trieu" id="price-4" />
+                          <label class="form-check-label" for="price-4">Trên 20 triệu</label>
                         </div>
                       </div>
                       <div class="col-12">
                         <div class="mb-2"><b>Sắp xếp</b></div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="radio-sort" value="Giá tăng dần" id="sort-1" />
+                          <input class="form-check-input" type="radio" name="radio-sort" value="gia-tang-dan" id="sort-1" />
                           <label class="form-check-label" for="sort-1">Giá tăng dần</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="radio-sort" value="Giá giảm dần" id="sort-2" />
+                          <input class="form-check-input" type="radio" name="radio-sort" value="gia-giam-dan" id="sort-2" />
                           <label class="form-check-label" for="sort-2">Giá giảm dần</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="radio-sort" value="Không sắp xếp" id="sort-3" checked />
+                          <input class="form-check-input" type="radio" name="radio-sort" value="khong-sap-xep" id="sort-3" checked />
                           <label class="form-check-label" for="sort-3">Không sắp xếp</label>
                         </div>
                       </div>
@@ -135,6 +135,13 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
               <!-- list products -->
               <div class="col-lg-8">
                 <div class="row g-4 justify-content-center">
+                  <c:if test="${totalPages  == 0}">
+                    <div class="col-12">
+                      <div class="text-center">
+                         Không tìm thấy sản phẩm nào.
+                      </div>
+                    </div>
+                  </c:if>
                   <c:forEach var="product" items="${products}">
                     <div class="col-md-6 col-lg-6 col-xl-4">
                     <div class="rounded position-relative fruite-item">
@@ -161,30 +168,37 @@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                     </div>
                   </div>
                   </c:forEach>
+
                   <div class="col-12">
                     <nav aria-label="Page navigation example">
-                <ul class="pagination d-flex justify-content-center mt-5">
-                  <li class="page-item">
-                    <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'} rounded" href="/product?page=${currentPage - 1}" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-
-                  <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
-                    <li class="page-item"><a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'} rounded" href="/product?page=${loop.index + 1}">${loop.index + 1}</a></li>
-                </c:forEach>
-        
-                  <li class="page-item">
-                    <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'} rounded" href="/product?page=${currentPage + 1}" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+                        <ul class="pagination d-flex justify-content-center mt-5">
+                          <c:if test="${currentPage > 1}">
+                            <li class="page-item">
+                            <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'} rounded" href="/products?page=${currentPage - 1}${queryString}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>
+                          </c:if>
+                          
+  
+                          <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
+                            <li class="page-item"><a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'} rounded" href="/products?page=${loop.index + 1}${queryString}">${loop.index + 1}</a></li>
+                          </c:forEach>
+                
+                          <c:if test="${currentPage < totalPages}">
+                            <li class="page-item">
+                            <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'} rounded" href="/products?page=${currentPage + 1}${queryString}" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span> 
+                            </a>
+                          </li>
+                          </c:if>
+                          
+                        </ul>
+                    </nav>
                   </div>
                 </div>
               </div>
-          </div>
+        </div>
       </div>
     </div>
 
