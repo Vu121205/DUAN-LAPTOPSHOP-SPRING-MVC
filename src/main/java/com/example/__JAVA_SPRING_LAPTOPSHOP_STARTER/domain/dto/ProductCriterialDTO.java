@@ -40,6 +40,4 @@ public class ProductCriterialDTO {
     public void setSort(Optional<String> sort) {
         this.sort = sort;
     }
-
-    
 }

@@ -32,7 +32,7 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Email</th>
+                    <th>Name</th>
                     <th>Price</th>
                     <th>Factory</th>
                     <th>Action</th>
